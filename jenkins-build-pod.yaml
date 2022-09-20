@@ -5,9 +5,23 @@ spec:
   containers:
     - name: kaniko
       image: gcr.io/kaniko-project/executor:latest
-      command: ['cat']
+      imagePullPolicy: IfNotPresent
+      command:
+      - /busybox/cat
       tty: true
+      volumeMounts:
+        - name: jenkins-docker-cfg
+          mountPath: /kaniko/.docker
     - name: kubectl
       image: bitnami/kubectl:latest
       command: ['cat']
       tty: true
+    volumes:
+    - name: jenkins-docker-cfg
+      projected:
+        sources:
+        - secret:
+            name: docker-credentials
+            items:
+              - key: .dockerconfigjson
+                path: config.json
