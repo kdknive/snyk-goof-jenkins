@@ -35,6 +35,8 @@ pipeline {
             snykSecurity(
                 snykInstallation: 'snyk@latest',
                 snykTokenId: 'kdknive-snyk',
+                failOnIssues: 'false',
+                failOnError: 'false',
             )
         }
     }
@@ -49,51 +51,51 @@ pipeline {
     //   }
     // }
 
-    stage("Deploy") {
-      steps {
-        container("kubectl") {
-          sh """cat <<EOF | kubectl apply -f -
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: snyk-goof-jenkins
-  namespace: jenkins
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: snyk-goof-jenkins
-  template:
-    metadata:
-      labels:
-        app: snyk-goof-jenkins
-    spec:
-      containers:
-      - name: snyk-goof-jenkins
-        image: kdknive/snyk-goof-jenkins:latest
-        ports:
-            - name: one
-              containerPort: 3001
-            - name: two
-              containerPort: 9229
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: snyk-goof-jenkins-lb
-  namespace: jenkins
-spec:
-  type: LoadBalancer
-  selector:
-    app: snyk-goof-jenkins
-  ports:
-    - protocol: TCP
-      port: 3001
-      targetPort: 3001
-"""
-          sh "kubectl rollout status deployments/snyk-goof-jenkins"
-        }
-      }
-    }
+//     stage("Deploy") {
+//       steps {
+//         container("kubectl") {
+//           sh """cat <<EOF | kubectl apply -f -
+// apiVersion: apps/v1
+// kind: Deployment
+// metadata:
+//   name: snyk-goof-jenkins
+//   namespace: jenkins
+// spec:
+//   replicas: 1
+//   selector:
+//     matchLabels:
+//       app: snyk-goof-jenkins
+//   template:
+//     metadata:
+//       labels:
+//         app: snyk-goof-jenkins
+//     spec:
+//       containers:
+//       - name: snyk-goof-jenkins
+//         image: kdknive/snyk-goof-jenkins:latest
+//         ports:
+//             - name: one
+//               containerPort: 3001
+//             - name: two
+//               containerPort: 9229
+// ---
+// apiVersion: v1
+// kind: Service
+// metadata:
+//   name: snyk-goof-jenkins-lb
+//   namespace: jenkins
+// spec:
+//   type: LoadBalancer
+//   selector:
+//     app: snyk-goof-jenkins
+//   ports:
+//     - protocol: TCP
+//       port: 3001
+//       targetPort: 3001
+// """
+//           sh "kubectl rollout status deployments/snyk-goof-jenkins"
+//         }
+//       }
+//     }
   }
 }
