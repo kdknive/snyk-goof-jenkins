@@ -13,23 +13,23 @@ pipeline {
   }
 
    stages {
-        stage('Build & Push') {
-        steps {
-            container(name: 'kaniko', shell: '/busybox/sh') {
-              withEnv(['PATH+EXTRA=/busybox']) {
-                sh '''#!/busybox/sh -xe
-                  /kaniko/executor \
-                    --dockerfile Dockerfile \
-                    -v `pwd`/ \
-                    --verbosity debug \
-                    --insecure \
-                    --skip-tls-verify \
-                    --destination kdknive/snyk-goof-jenkins:latest
-                '''
-                }
-            }
-        }
-    }
+    //     stage('Build & Push') {
+    //     steps {
+    //         container(name: 'kaniko', shell: '/busybox/sh') {
+    //           withEnv(['PATH+EXTRA=/busybox']) {
+    //             sh '''#!/busybox/sh -xe
+    //               /kaniko/executor \
+    //                 --dockerfile Dockerfile \
+    //                 -v `pwd`/ \
+    //                 --verbosity debug \
+    //                 --insecure \
+    //                 --skip-tls-verify \
+    //                 --destination kdknive/snyk-goof-jenkins:latest
+    //             '''
+    //             }
+    //         }
+    //     }
+    // }
     stage('Snyk Test') {
         steps {
             snykSecurity(
@@ -37,6 +37,7 @@ pipeline {
                 snykTokenId: 'kdknive-snyk',
                 failOnIssues: 'false',
                 failOnError: 'false',
+                additionalArguments: '--debug',
             )
         }
     }
