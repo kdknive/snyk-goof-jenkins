@@ -3,11 +3,11 @@ kind: Pod
 spec:
   serviceAccountName: jenkins-admin
   containers:
-    - name: gcloud
-      image: gcr.io/cloud-builders/gcloud
-      command: ['cat']
-      tty: true
+    # - name: gcloud
+    #   image: gcr.io/cloud-builders/gcloud
+    #   command: ['cat']
+    #   tty: true
     - name: kubectl
-      image: gcr.io/cloud-builders/kubectl
+      image: bitnami/kubectl:latest
       command: ['cat']
       tty: true
