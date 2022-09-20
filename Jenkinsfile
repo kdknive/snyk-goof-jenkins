@@ -20,7 +20,7 @@ pipeline {
                 sh '''#!/busybox/sh -xe
                   /kaniko/executor \
                     --dockerfile Dockerfile \
-                    -v `pwd`/config.json:/kaniko/.docker/config.json:ro \
+                    -v `pwd`/ \
                     --verbosity debug \
                     --insecure \
                     --skip-tls-verify \
