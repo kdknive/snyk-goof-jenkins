@@ -49,6 +49,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: snyk-goof-jenkins
+  namespace: jenkins
 spec:
   replicas: 1
   selector:
@@ -59,6 +60,7 @@ spec:
       labels:
         app: snyk-goof-jenkins
     spec:
+      serviceAccountName: jenkins-admin
       containers:
       - name: snyk-goof-jenkins
         image: kdknive/snyk-goof-jenkins:latest
@@ -72,7 +74,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: snyk-goof-jenkins-lb
+  namespace: jenkins
 spec:
+  serviceAccountName: jenkins-admin
   type: LoadBalancer
   selector:
     app: snyk-goof-jenkins
