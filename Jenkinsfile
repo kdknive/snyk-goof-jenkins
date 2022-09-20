@@ -60,7 +60,6 @@ spec:
       labels:
         app: snyk-goof-jenkins
     spec:
-      serviceAccountName: jenkins-admin
       containers:
       - name: snyk-goof-jenkins
         image: kdknive/snyk-goof-jenkins:latest
@@ -76,7 +75,6 @@ metadata:
   name: snyk-goof-jenkins-lb
   namespace: jenkins
 spec:
-  serviceAccountName: jenkins-admin
   type: LoadBalancer
   selector:
     app: snyk-goof-jenkins
@@ -85,7 +83,7 @@ spec:
       port: 3001
       targetPort: 3001
 """
-          sh "kubectl rollout status deployments/snyk-goof-jenkins"
+        //   sh "kubectl rollout status deployments/snyk-goof-jenkins"
         }
       }
     }
