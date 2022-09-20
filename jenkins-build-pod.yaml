@@ -13,7 +13,7 @@ spec:
         - name: jenkins-docker-cfg
           mountPath: /kaniko/.docker
     - name: kubectl
-      image: bitnami/kubectl:latest
+      image: gcr.io/cloud-builders/kubectl
       command: ['cat']
       tty: true
   volumes:
