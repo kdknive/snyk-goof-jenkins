@@ -26,6 +26,7 @@ pipeline {
                     --skip-tls-verify \
                     --destination kdknive/snyk-goof-jenkins:latest
                 '''
+                }
             }
         }
     }
