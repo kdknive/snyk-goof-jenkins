@@ -13,6 +13,14 @@ pipeline {
   }
 
    stages {
+    stage('Snyk Test') {
+        steps {
+            snykSecurity(
+                snykInstallation: 'snyk@latest',
+                snykTokenId: 'kdknive-snyk',
+            )
+        }
+    }
     stage('Build & Push') {
         steps {
             container(name: 'kaniko', shell: '/busybox/sh') {
