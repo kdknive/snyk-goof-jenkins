@@ -15,7 +15,7 @@ pipeline {
    stages {
     stage('Build & Push') {
         steps {
-            container("docker") {
+            container("kaniko") {
                 sh 'docker build -t kdknive/snyk-goof-jenkins:latest .'
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh 'docker push kdknive/snyk-goof-jenkins:latest'

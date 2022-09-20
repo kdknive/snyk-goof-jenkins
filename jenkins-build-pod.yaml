@@ -3,8 +3,8 @@ kind: Pod
 spec:
   serviceAccountName: jenkins-admin
   containers:
-    - name: docker
-      image: docker
+    - name: kaniko
+      image: gcr.io/kaniko-project/executor:latest
       command: ['cat']
       tty: true
     - name: kubectl
