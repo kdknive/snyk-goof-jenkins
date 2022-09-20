@@ -16,7 +16,7 @@ spec:
       image: bitnami/kubectl:latest
       command: ['cat']
       tty: true
-    volumes:
+  volumes:
     - name: jenkins-docker-cfg
       projected:
         sources:
