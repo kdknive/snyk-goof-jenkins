@@ -83,7 +83,7 @@ spec:
       port: 3001
       targetPort: 3001
 """
-        //   sh "kubectl rollout status deployments/snyk-goof-jenkins"
+          sh "kubectl rollout status deployments/snyk-goof-jenkins"
         }
       }
     }
