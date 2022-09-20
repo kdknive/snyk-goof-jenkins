@@ -13,15 +13,7 @@ pipeline {
   }
 
    stages {
-    stage('Snyk Test') {
-        steps {
-            snykSecurity(
-                snykInstallation: 'snyk@latest',
-                snykTokenId: 'kdknive-snyk',
-            )
-        }
-    }
-    stage('Build & Push') {
+        stage('Build & Push') {
         steps {
             container(name: 'kaniko', shell: '/busybox/sh') {
               withEnv(['PATH+EXTRA=/busybox']) {
@@ -36,6 +28,14 @@ pipeline {
                 '''
                 }
             }
+        }
+    }
+    stage('Snyk Test') {
+        steps {
+            snykSecurity(
+                snykInstallation: 'snyk@latest',
+                snykTokenId: 'kdknive-snyk',
+            )
         }
     }
     // stage("Build") {
