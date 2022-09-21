@@ -4,7 +4,7 @@ spec:
   serviceAccountName: jenkins-admin
   containers:
     - name: snyk
-      image: snyk/snyk
+      image: snyk/snyk:latest
       imagePullPolicy: IfNotPresent
       command: ['cat']
       tty: true
