@@ -4,7 +4,7 @@ spec:
   serviceAccountName: jenkins-admin
   containers:
     - name: snyk
-      image: snyk/snyk-cli
+      image: snyk/snyk:alpine
       imagePullPolicy: IfNotPresent
       command: ['cat']
       tty: true
