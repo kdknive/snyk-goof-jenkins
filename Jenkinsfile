@@ -34,8 +34,7 @@ pipeline {
         steps {
             // withCredentials([token(credentialsId: 'kdknive-snyk', variable: 'TOKEN')]){
                 container("snyk") {
-                sh "snyk auth 0aeefd66-dd80-41dd-a006-f696797400f8"
-                sh 'snyk test'
+                sh "SNYK_TOKEN=0aeefd66-dd80-41dd-a006-f696797400f8 snyk test"
                 }
             // }
         }
