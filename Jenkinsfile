@@ -32,9 +32,11 @@ pipeline {
     // }
     stage('Snyk Test') {
         steps {
-            container("snyk") {
-                sh "snyk auth ${params.SNYK_TOKEN}"
+            withCredentials([string(credentialsId: 'kdknive-snyk', variable: 'TOKEN')]){
+                container("snyk") {
+                sh "snyk auth $TOKEN"
                 sh 'snyk test'
+                }
             }
         }
     }
