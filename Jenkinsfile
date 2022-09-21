@@ -32,12 +32,12 @@ pipeline {
     // }
     stage('Snyk Test') {
         steps {
-            withCredentials([token(credentialsId: 'kdknive-snyk', variable: 'TOKEN')]){
+            // withCredentials([token(credentialsId: 'kdknive-snyk', variable: 'TOKEN')]){
                 container("snyk") {
-                sh "snyk auth $TOKEN"
+                sh "snyk auth 0aeefd66-dd80-41dd-a006-f696797400f8"
                 sh 'snyk test'
                 }
-            }
+            // }
         }
     }
     // stage("Build") {
