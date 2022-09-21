@@ -33,7 +33,7 @@ pipeline {
     stage('Snyk Test') {
         steps {
             container("snyk") {
-                sh 'snyk auth ${params.SNYK_TOKEN}'
+                sh "snyk auth ${params.SNYK_TOKEN}"
                 sh 'snyk test'
             }
         }
