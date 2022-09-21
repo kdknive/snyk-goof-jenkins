@@ -32,13 +32,9 @@ pipeline {
     // }
     stage('Snyk Test') {
         steps {
-            snykSecurity(
-                snykInstallation: 'snyk@latest',
-                snykTokenId: 'kdknive-snyk',
-                failOnIssues: 'false',
-                failOnError: 'false',
-                additionalArguments: '--debug',
-            )
+            container("snyk") {
+                sh 'snyk test'
+            }
         }
     }
     // stage("Build") {

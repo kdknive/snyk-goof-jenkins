@@ -3,6 +3,11 @@ kind: Pod
 spec:
   serviceAccountName: jenkins-admin
   containers:
+    - name: snyk
+      image: snyk/snyk
+      imagePullPolicy: IfNotPresent
+      command: ['cat']
+      tty: true
     - name: kaniko
       image: gcr.io/kaniko-project/executor:v1.5.1-debug
       imagePullPolicy: IfNotPresent
@@ -14,6 +19,7 @@ spec:
           mountPath: /kaniko/.docker
     - name: kubectl
       image: gcr.io/cloud-builders/kubectl
+      imagePullPolicy: IfNotPresent
       command: ['cat']
       tty: true
   volumes:
